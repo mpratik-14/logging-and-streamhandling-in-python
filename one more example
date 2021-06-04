@@ -1,0 +1,51 @@
+#python code
+#Question -->- #1)
+
+# Create a class 'Data'
+# Create class variable called 'filename'-list or dict or tuple or normal, 'file_type', 'date','size'
+# create a function 'file_open'. Responsible for try to take file name and try to create the file name if nor exist and write some data.
+# Create another function 'file_read'. It should take file name and suppose to read and return the data in it
+# Create a function 'file_append'. Insert some new data in same file and show the data
+#2)
+# Implememt exception handling.
+# Implement logger inside it. Do not call log directly . Create a separate method for that and call that function whenever you want to log something.
+
+
+#Code -->
+
+import logging as lg
+lg.basicConfig(filename = 'oops.log',level = lg.ERROR)
+class Data:
+    def __init__(self,filename , filetype, data, size):
+        self.filename = filename
+        self.filetype = filetype
+        self.data = data
+        self.size = size
+    
+    def file_open(self):
+        try:
+            with open(self.filename + self.filetype , 'w') as f:
+                f.write(self.data)
+        except Exception as e:
+            self.logging(e)
+            
+    def file_read(self):
+        try:
+            with open(self.filename + self.filetype, 'r') as f:
+                f.read()
+        except Exception as e:
+            self.logging(e)
+    
+    def file_append(self,data):
+        try:
+            with open(self.filename + self.filetype, 'a') as f:
+                f.write(data)
+        except Exception as e:
+            self.logging(e)
+    
+    def logging(self, log):
+        lg.error(log)
+        
+d = Data('d','.txt', 'hi', 2)
+d.file_open()
+d.file_append('op')
