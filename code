@@ -1,0 +1,18 @@
+# logging_example.py
+
+import logging
+
+logging.basicConfig(filename='app1.log',level=logging.DEBUG,format = '%(name)s - %(asctime)s - %(levelname)s - %(message)s')
+
+# Create handlers
+console_log = logging.StreamHandler()
+console_log.setLevel(logging.DEBUG)
+format = logging.Formatter('%(name)s - %(asctime)s - %(levelname)s - %(message)s')
+console_log.setFormatter(format)
+# Create a custom logger
+logging.getLogger('').addHandler(console_log)
+logging.info('main log')
+logger1 = logging.getLogger('user1')
+logger2 = logging.getLogger('user2')
+logger1.info('this is from user1 info')
+logger2.debug('This is from user2 debug')
